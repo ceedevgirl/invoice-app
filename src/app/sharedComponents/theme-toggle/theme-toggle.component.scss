@@ -1,0 +1,14 @@
+@use '../partials/mixins' as *;
+@use '../partials/variables' as *;
+
+.theme-toggle {
+    width: 72px; 
+    height: 72px;
+   @include flex-center;
+   cursor: pointer;
+}
+
+img {
+    width: 26px;
+    height: 26px;
+  }
