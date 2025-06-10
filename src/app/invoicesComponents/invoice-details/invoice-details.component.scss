@@ -1,0 +1,226 @@
+@use '../../sharedComponents/partials/mixins' as *;
+@use '../../sharedComponents/partials/variables' as *;
+
+.invoice-details-container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: $space-md;
+  max-width: 40rem;
+  margin: 0 auto;
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    color: var(--text-color);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    margin-bottom: $space-md;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+
+    &:hover {
+      color: $color-purple-1;
+    }
+  }
+
+  .status-bar {
+    @include flex-center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    padding: $space-sm $space-md;
+    border-radius: $radius-md;
+    margin-bottom: $space-md;
+
+    .label {
+      color: $color-blue-1;
+      font-size: $font-size-xs;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: $space-xs;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-xs;
+      text-transform: capitalize;
+      border-radius: $radius-full;
+      padding: $space-xs $space-sm;
+
+      .dot {
+        font-size: 1.2rem;
+        color: currentColor;
+      }
+
+      &.status-draft {
+        background-color: rgba(55, 59, 83, 0.0571);
+        color: $color-draft-bg;
+      }
+
+      &.status-pending {
+        background-color: rgba(255, 143, 0, 0.0571);
+        color: $color-pending-bg;
+      }
+
+      &.status-paid {
+        background-color: rgba(51, 214, 159, 0.0571);
+        color: $color-green;
+      }
+    }
+  }
+
+  .invoice-detail-content {
+    background-color: var(--card-bg);
+    border-radius: $radius-md;
+    padding: $space-md;
+    margin-bottom: $space-md;
+
+    .top-info {
+      margin-bottom: $space-md;
+
+      h2 {
+        font-size: $font-size-md;
+        margin-bottom: $space-xs;
+      }
+
+      p {
+        font-size: $font-size-sm;
+        color: $color-blue-1;
+      }
+    }
+
+    .sender-address,
+    .detail-address {
+      font-size: $font-size-xs;
+      color: $color-blue-1;
+      line-height: 1.4;
+      margin-bottom: $space-md;
+    }
+
+    .details-columns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $space-md;
+      margin-bottom: $space-md;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .label {
+        font-size: $font-size-xs;
+        color: $color-blue-1;
+        margin-bottom: $space-xs;
+      }
+
+      .value {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    .client-email {
+      .label {
+        font-size: $font-size-xs;
+        color: $color-blue-1;
+        margin-bottom: $space-xs;
+      }
+
+      .value {
+        font-size: $font-size-sm;
+        color: $color-purple-1;
+      }
+
+      margin-bottom: $space-md;
+    }
+
+    .invoice-items {
+      border-radius: $radius-sm;
+      padding: $space-md 0;
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        margin-bottom: $space-sm;
+      }
+    }
+
+    .total-section {
+      background-color: $color-dark-2;
+      padding: $space-md;
+      border-radius: $radius-md;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .label {
+        font-size: $font-size-xs;
+        color: $color-light-1;
+      }
+
+      .total {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $color-white;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-sm;
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: $radius-full;
+      padding: $space-sm $space-md;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.btn-secondary {
+        background-color: var(--form-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+
+        &:hover {
+          background-color: $color-white;
+          color: $color-dark-bg;
+        }
+      }
+
+      &.btn-danger {
+        background-color: $red-button-color;
+        color: $color-white;
+
+        &:hover {
+          background-color: #ff6b6b;
+        }
+      }
+
+      &.btn-primary {
+        background-color: $color-purple-1;
+        color: $color-white;
+
+        &:hover {
+          background-color: $color-purple-2;
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
