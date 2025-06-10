@@ -1,0 +1,82 @@
+<div class="invoice-details-container">
+  <!-- Back Button -->
+  <button class="back-btn" (click)="goBack()">
+    <img src="assets/icon-arrow-left.svg" alt="Back arrow" />
+    <span>Go back</span>
+  </button>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="label">Status</span>
+    <span class="status-badge" [ngClass]="'status-' + invoice.status.toLowerCase()">
+      <span class="dot"></span>
+      {{ invoice.status }}
+    </span>
+  </div>
+
+  <!-- Invoice Info -->
+  <div class="invoice-detail-content">
+    <div class="top-info">
+      <h2>#{{ invoice.id }}</h2>
+      <p>{{ invoice.description }}</p>
+    </div>
+
+    <!-- Sender Address -->
+    <div class="sender-address">
+      <p>{{ invoice.senderAddress.street }}</p>
+      <p>{{ invoice.senderAddress.city }}</p>
+      <p>{{ invoice.senderAddress.postCode }}</p>
+      <p>{{ invoice.senderAddress.country }}</p>
+    </div>
+
+    <!-- Date & Bill To -->
+    <div class="details-columns">
+      <div class="dates">
+        <p class="label">Invoice Date</p>
+        <p class="value">{{ invoice.createdAt | date:'dd MMM yyyy' }}</p>
+
+        <p class="label">Payment Due</p>
+        <p class="value">{{ invoice.paymentDue | date:'dd MMM yyyy' }}</p>
+      </div>
+
+      <div class="bill-to">
+        <p class="label">Bill To</p>
+        <p class="value">{{ invoice.clientName }}</p>
+        <p class="address-line">{{ invoice.clientAddress.street }}</p>
+        <p class="address-line">{{ invoice.clientAddress.city }}</p>
+        <p class="address-line">{{ invoice.clientAddress.postCode }}</p>
+        <p class="address-line">{{ invoice.clientAddress.country }}</p>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="client-email">
+      <p class="label">Sent to</p>
+      <p class="value">{{ invoice.clientEmail }}</p>
+    </div>
+
+    <!-- Invoice Items -->
+    <div class="invoice-items">
+      <div *ngFor="let item of invoice.items" class="item">
+        <p>{{ item.name }} x {{ item.quantity }}</p>
+        <p>£{{ item.total | number:'1.2-2' }}</p>
+      </div>
+    </div>
+
+    <!-- Total -->
+    <div class="total-section">
+      <p class="label">Amount Due</p>
+      <p class="total">£{{ invoice.total | number:'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="btn-secondary" (click)="editInvoice()">Edit</button>
+    <button class="btn-danger" (click)="deleteInvoice()">Delete</button>
+    <button class="btn-primary" [disabled]="invoice.status === 'paid'" (click)="markAsPaid()">
+      Mark as Paid
+    </button>
+  </div>
+</div>
+

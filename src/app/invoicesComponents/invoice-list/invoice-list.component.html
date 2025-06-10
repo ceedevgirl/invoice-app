@@ -1,0 +1,68 @@
+<div class="invoices-header">
+  <div>
+    <h1>Invoices</h1>
+    <p>{{ invoices.length }} invoices</p>
+  </div>
+
+  <div class="actions">
+  <div  class="filter-wrapper">
+      <button class="filter-btn" (click)="toggleFilterDropdown()">
+  Filter
+  <img
+    src="assets/icon-arrow-down.svg"
+    alt="Dropdown arrow"
+    class="arrow-img"
+    [class.rotated]="showFilterOptions"
+  />
+</button>
+
+<!-- Dropdown: conditionally rendered -->
+<div *ngIf="showFilterOptions" class="filter-dropdown">
+  <label>
+    <input type="checkbox" [(ngModel)]="filterOptions.draft" (change)="applyFilters()" />
+    Draft
+  </label>
+  <label>
+    <input type="checkbox" [(ngModel)]="filterOptions.pending" (change)="applyFilters()" />
+    Pending
+  </label>
+  <label>
+    <input type="checkbox" [(ngModel)]="filterOptions.paid" (change)="applyFilters()" />
+    Paid
+  </label>
+</div>
+  </div>
+
+    <button class="btn-new">
+      <span class="btn-icon">
+        <img src="assets/icon-plus.svg" alt="Plus icon" />
+      </span>
+      <span class="btn-text">New</span>
+    </button>
+  </div>
+</div>
+ 
+
+<!-- invoice-card -->
+<div class="invoice-list">
+  <div *ngFor="let invoice of filteredInvoices" class="invoice-item" [routerLink]="['/invoices', invoice.id]">
+    <div class="invoice-id"><span>#</span>{{ invoice.id }}</div>
+    <div class="client-name">{{ invoice.clientName }}</div>
+
+    <div class="invoice-due">Due {{ invoice.paymentDue | date:'dd MMM yyyy' }}</div>
+    <div class="invoice-total">£{{ invoice.total | number:'1.2-2' }}</div>
+
+    <div class="status-badge" [ngClass]="invoice.status">
+      <span class="dot"></span>
+      <span class="text">{{ invoice.status }}</span>
+    </div>
+
+    <div class="arrow-right"><img src="/public/assets/icon-arrow-right.svg" alt=""></div>
+  </div>
+
+  
+</div>
+
+
+
+
